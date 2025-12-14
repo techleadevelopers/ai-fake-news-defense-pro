@@ -10,48 +10,48 @@ const integrations = [
     id: "instagram",
     name: "Instagram",
     category: "Social",
-    description: "Scan images and reels for manipulated content and deepfakes automatically.",
-    status: "Connected",
+    description: "Analisa imagens e reels em busca de conteúdo manipulado e deepfakes automaticamente.",
+    status: "Conectado",
     icon: "📸"
   },
   {
     id: "twitter",
     name: "X (Twitter)",
     category: "Social",
-    description: "Real-time firehose monitoring for botnet clusters and trending misinformation.",
-    status: "Available",
+    description: "Monitoramento em tempo real para clusters de bots e desinformação em alta.",
+    status: "Disponível",
     icon: "✖️"
   },
   {
     id: "tiktok",
     name: "TikTok",
-    category: "Video",
-    description: "Frame-by-frame video analysis for face-swaps and synthetic audio overlay.",
-    status: "Available",
+    category: "Vídeo",
+    description: "Análise de vídeo quadro a quadro para trocas de rosto e sobreposição de áudio sintético.",
+    status: "Disponível",
     icon: "🎵"
   },
   {
     id: "wordpress",
     name: "WordPress",
     category: "CMS",
-    description: "Plugin to verify article drafts before publishing. preventing accidental fake news.",
-    status: "Coming Soon",
+    description: "Plugin para verificar rascunhos de artigos antes da publicação, prevenindo fake news acidentais.",
+    status: "Em Breve",
     icon: "📝"
   },
   {
     id: "slack",
     name: "Slack",
-    category: "Notifications",
-    description: "Receive critical security alerts directly in your Ops channel.",
-    status: "Connected",
+    category: "Notificações",
+    description: "Receba alertas críticos de segurança diretamente no seu canal de Ops.",
+    status: "Conectado",
     icon: "💬"
   },
   {
     id: "salesforce",
     name: "Salesforce",
     category: "CRM",
-    description: "Enrich customer profiles with risk scores and social verification data.",
-    status: "Available",
+    description: "Enriqueça perfis de clientes com pontuações de risco e dados de verificação social.",
+    status: "Disponível",
     icon: "☁️"
   }
 ];
@@ -62,12 +62,12 @@ export default function Integrations() {
       <div className="space-y-6 max-w-6xl mx-auto">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-foreground">Integrations Marketplace</h1>
-            <p className="text-muted-foreground">Connect Risk Guardian to your existing stack.</p>
+            <h1 className="text-3xl font-bold tracking-tight text-foreground">Mercado de Integrações</h1>
+            <p className="text-muted-foreground">Conecte o Risk Guardian à sua stack existente.</p>
           </div>
           <div className="relative w-[300px]">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input placeholder="Search integrations..." className="pl-9" />
+            <Input placeholder="Buscar integrações..." className="pl-9" />
           </div>
         </div>
 
@@ -79,14 +79,14 @@ export default function Integrations() {
                    <div className="h-12 w-12 rounded-lg bg-muted flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
                      {item.icon}
                    </div>
-                   {item.status === 'Connected' ? (
+                   {item.status === 'Conectado' ? (
                      <Badge className="bg-green-500/10 text-green-600 hover:bg-green-500/20 border-green-500/20">
-                       <CheckCircle2 className="mr-1 h-3 w-3" /> Installed
+                       <CheckCircle2 className="mr-1 h-3 w-3" /> Instalado
                      </Badge>
-                   ) : item.status === 'Coming Soon' ? (
-                     <Badge variant="outline" className="text-muted-foreground">Waitlist</Badge>
+                   ) : item.status === 'Em Breve' ? (
+                     <Badge variant="outline" className="text-muted-foreground">Lista de Espera</Badge>
                    ) : (
-                     <Badge variant="secondary">Available</Badge>
+                     <Badge variant="secondary">Disponível</Badge>
                    )}
                 </div>
                 <CardTitle className="mt-4">{item.name}</CardTitle>
@@ -96,11 +96,11 @@ export default function Integrations() {
               </CardHeader>
               <CardFooter className="mt-auto pt-0">
                 <Button 
-                  variant={item.status === 'Connected' ? "outline" : "default"} 
+                  variant={item.status === 'Conectado' ? "outline" : "default"} 
                   className="w-full"
-                  disabled={item.status === 'Coming Soon'}
+                  disabled={item.status === 'Em Breve'}
                 >
-                  {item.status === 'Connected' ? 'Configure' : item.status === 'Coming Soon' ? 'Notify Me' : 'Connect'}
+                  {item.status === 'Conectado' ? 'Configurar' : item.status === 'Em Breve' ? 'Notifique-me' : 'Conectar'}
                 </Button>
               </CardFooter>
             </Card>
@@ -110,12 +110,12 @@ export default function Integrations() {
             <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4">
               <Plus className="h-6 w-6" />
             </div>
-            <h3 className="font-semibold">Build your own</h3>
+            <h3 className="font-semibold">Crie o seu</h3>
             <p className="text-sm text-muted-foreground mt-2 mb-4 max-w-[200px]">
-              Use our Developer API to build custom connectors for your proprietary tools.
+              Use nossa API de Desenvolvedor para criar conectores personalizados para suas ferramentas proprietárias.
             </p>
             <Button variant="link" className="text-primary gap-1">
-              View Documentation <ArrowRight className="h-4 w-4" />
+              Ver Documentação <ArrowRight className="h-4 w-4" />
             </Button>
           </Card>
         </div>
