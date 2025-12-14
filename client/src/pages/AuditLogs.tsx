@@ -9,12 +9,12 @@ export default function AuditLogs() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-foreground">Audit Ledger</h1>
-            <p className="text-muted-foreground">Immutable append-only log of all system decisions.</p>
+            <h1 className="text-3xl font-bold tracking-tight text-foreground">Registro de Auditoria</h1>
+            <p className="text-muted-foreground">Registro imutável de todas as decisões do sistema.</p>
           </div>
           <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/50 px-3 py-1 rounded-md border border-border">
             <Lock className="h-3 w-3" />
-            <span>Ledger Integrity: Verified</span>
+            <span>Integridade do Registro: Verificada</span>
           </div>
         </div>
 
@@ -33,17 +33,17 @@ export default function AuditLogs() {
                   <CardContent className="p-4 grid gap-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">User / Agent</span>
+                        <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Usuário / Agente</span>
                         <div className="font-mono text-sm mt-1">{log.user}</div>
                       </div>
                       <div>
-                        <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Target ID</span>
+                        <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">ID Alvo</span>
                         <div className="font-mono text-sm mt-1">{log.targetId}</div>
                       </div>
                     </div>
                     
                     <div>
-                      <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Details</span>
+                      <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Detalhes</span>
                       <div className="text-sm mt-1">{log.details}</div>
                     </div>
 
