@@ -1,18 +1,39 @@
-# ML Evaluation Service - Government/RegTech Level
+ML Evaluation Service – Government / RegTech Level
 
-## Overview
-Explainable AI service for text analysis built with FastAPI.
-**AI DOES NOT DECIDE - ONLY EVALUATES.**
+Explainable AI for Risk Evaluation — AI Does Not Decide, Only Evaluates
 
-All predictions are:
-- Calibrated (Platt Scaling / Isotonic)
-- Uncertainty-quantified
-- Ensemble-validated (multiple models must agree)
-- Auditable with full version control
+📌 Executive Summary
 
-## Architecture (Government Level)
+The ML Evaluation Service is a government-grade, explainable AI system designed for text risk evaluation in regulated environments such as:
 
-```
+Government agencies
+
+Regulatory bodies
+
+Compliance & RegTech platforms
+
+Electoral integrity and public discourse monitoring
+
+⚠️ This system does not automate decisions.
+It produces calibrated, explainable, and auditable risk evaluations to support human oversight.
+
+🧭 Core Principles
+
+AI DOES NOT DECIDE — ONLY EVALUATES
+
+Human-in-the-loop by design
+
+Explainability is mandatory
+
+Uncertainty-aware predictions
+
+No single model can decide
+
+Full auditability and traceability
+
+Designed for legal and regulatory scrutiny
+
+🏗️ Architecture (Government Level)
 ml/
 ├── core/                    # Core ML infrastructure
 │   ├── inference/           # Ensemble inference (transformer, linear, rules)
@@ -34,63 +55,51 @@ ml/
 │   └── bias/                # Fairness analysis
 ├── text/                    # NLP modules (PT-BR)
 ├── explainability/          # Model interpretability
-├── drift/                   # Drift detection (PSI/KL)
+├── drift/                   # Drift detection (PSI / KL)
 ├── serving/                 # Service orchestration
-└── registry/                # Model versioning
-```
+└── registry/                # Model versioning & audit registry
 
-## Endpoints
-
-### Government Level (v2.0.0)
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/ml/text/risk-evaluate` | POST | Full Government-level risk evaluation |
-| `/ml/text/political` | POST | Political risk analysis |
-| `/ml/text/misinformation` | POST | Misinformation detection |
-| `/ml/text/impersonation` | POST | Impersonation/fraud detection |
-| `/ml/governance/model-cards` | GET | Model documentation |
-| `/ml/governance/release-policy` | GET | Deployment gates config |
-| `/ml/governance/bias-report/{id}` | GET | Bias/fairness analysis |
-
-### Standard Endpoints
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/ml/text/ai-detection` | POST | Risk classification |
-| `/ml/text/defamation` | POST | Defamation detection |
-| `/ml/text/ner` | POST | Named Entity Recognition |
-| `/ml/explain` | POST | Explainability |
-| `/ml/drift/status` | GET | Drift detection |
-| `/ml/registry/models` | GET | Registered models |
-| `/ml/registry/audit` | GET | Audit trail |
-| `/ml/health` | GET | Health check |
-| `/ml/docs` | GET | Swagger UI |
-
-## Government Output Format
-
-```json
+🌐 API Endpoints
+Government-Level Endpoints (v2.0.0)
+Endpoint	Method	Description
+/ml/text/risk-evaluate	POST	Full government-grade risk evaluation
+/ml/text/political	POST	Political risk analysis (high FP protection)
+/ml/text/misinformation	POST	Misinformation detection
+/ml/text/impersonation	POST	Identity impersonation / fraud
+/ml/governance/model-cards	GET	Formal model documentation
+/ml/governance/release-policy	GET	Deployment and approval gates
+/ml/governance/bias-report/{id}	GET	Bias & fairness analysis
+Standard / Supporting Endpoints
+Endpoint	Method	Description
+/ml/text/ai-detection	POST	Generic risk classification
+/ml/text/defamation	POST	Defamation detection
+/ml/text/ner	POST	Named Entity Recognition (PT-BR)
+/ml/explain	POST	Mandatory explainability
+/ml/drift/status	GET	Drift detection status
+/ml/registry/models	GET	Registered model versions
+/ml/registry/audit	GET	Inference audit trail
+/ml/health	GET	Health check
+/ml/docs	GET	Swagger UI
+📤 Government Output Format (Example)
 {
+  "scan_id": "uuid",
+  "prediction": "HUMAN_REVIEW",
+  "verdict": "ABSTAIN",
   "raw_score": 0.82,
   "calibrated_score": 0.74,
+  "risk_score_percent": 74.0,
   "confidence": 0.91,
   "uncertainty": 0.08,
-  "agreement": 0.87,
-  "prediction": "HIGH_RISK",
-  "abstain": false,
-  "signals": {
-    "transformer": 0.81,
-    "linear": 0.77,
-    "rules": 0.65
-  },
+  "ensemble_agreement": 0.87,
   "data_quality": {
     "score": 0.92,
-    "issues": [],
-    "usable": true
+    "usable": true,
+    "issues_found": []
   },
-  "calibration": {
-    "raw_score": 0.82,
-    "calibrated_score": 0.74,
+  "calibration_details": {
     "method": "platt",
-    "ece": 0.02
+    "ece": 0.02,
+    "brier_score": 0.003
   },
   "uncertainty_details": {
     "total": 0.08,
@@ -98,62 +107,119 @@ ml/
     "aleatoric": 0.06,
     "abstain": false
   },
-  "model_version": "1.0.0",
+  "governance_flags": {
+    "political_risk_detected": false,
+    "is_deepfake": false
+  },
+  "model_version": "MOD-TXT-001_v1.0.0",
   "model_hash": "abc123def456",
-  "inference_time": 12.5
+  "inference_time_ms": 12.5,
+  "timestamp": "2025-12-14T21:13:52Z"
 }
-```
 
-## Security Features
+🔐 Security & Safety Controls
 
-- **Stateless**: No state stored between requests
-- **Data Quality Gates**: Invalid data blocked before inference
-- **Ensemble Voting**: No single model decides
-- **Uncertainty Threshold**: High uncertainty → HUMAN_REVIEW
-- **Circuit Breaker**: Automatic failover
-- **Timeout**: 5 second limit
-- **Audit Trail**: Every inference logged
+Stateless service (no session persistence)
 
-## Calibration
+Strict data quality validation
 
-- **Platt Scaling**: Logistic regression on raw scores
-- **Isotonic Regression**: Non-parametric calibration
-- **Temperature Scaling**: For neural network outputs
-- **Metrics**: ECE, Brier Score, Reliability Curve
+Multi-model ensemble voting
 
-## Uncertainty Quantification
+Uncertainty-based abstention
 
-- **Monte Carlo Dropout**: Epistemic uncertainty
-- **Conformal Prediction**: Prediction intervals
-- **Abstention**: If uncertainty > 0.25 → HUMAN_REVIEW
+Human review enforcement
 
-## Governance
+Circuit breaker protection
 
-### Model Cards
-Each model has formal documentation:
-- Purpose, intended use, prohibited use
-- Dataset info, metrics, limitations
-- Approval status, ethical considerations
+Timeout limits (≤ 5s)
 
-### Release Policy
-Deployment gates:
-- min_precision: 0.92
-- max_fp_political: 0.03
-- max_uncertainty: 0.15
-- requires_signoff: true
+Full inference audit logging
 
-### Bias Detection
-- FPR/FNR by protected group
-- Disparity metrics
-- Compliance reports
+📊 Calibration Strategy
 
-## Running
+Platt Scaling
 
-```bash
+Isotonic Regression
+
+Temperature Scaling
+
+Metrics monitored:
+
+Expected Calibration Error (ECE)
+
+Brier Score
+
+Reliability Curves
+
+❓ Uncertainty Quantification
+
+Monte Carlo Dropout → Epistemic uncertainty
+
+Conformal Prediction → Prediction intervals
+
+Automatic abstention when uncertainty exceeds policy thresholds
+
+If uncertainty is high → HUMAN_REVIEW is mandatory
+
+🏛️ Governance & Compliance
+Model Cards
+
+Each model includes:
+
+Intended and prohibited use
+
+Training data description
+
+Metrics and limitations
+
+Bias considerations
+
+Approval and review status
+
+Release Policy (Example)
+min_precision: 0.92
+max_fp_political: 0.03
+max_uncertainty: 0.15
+requires_human_signoff: true
+
+Bias & Fairness
+
+False Positive / False Negative parity
+
+Disparity metrics
+
+Compliance-ready reports
+
+▶️ Running the Service
 python main.py
-```
 
-Server runs on `http://0.0.0.0:5000`
 
-## Last Updated
+Service will start at:
+
+http://0.0.0.0:5000
+
+
+Swagger UI:
+
+/ml/docs
+
+⚖️ Legal & Ethical Disclaimer
+
+This system:
+
+Does not make decisions
+
+Does not enforce actions
+
+Does not replace human judgment
+
+It provides risk signals only, designed to support lawful, ethical, and accountable decision-making.
+
+📅 Last Updated
+
 December 14, 2025
+
+🚀 Status
+
+Production-ready – Government / RegTech compliant
+Designed for audit, oversight, and public accountability
