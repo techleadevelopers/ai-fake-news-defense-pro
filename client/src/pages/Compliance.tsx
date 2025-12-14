@@ -7,46 +7,46 @@ import { Globe, Bot, Mic2, Video, Eye, BrainCircuit } from "lucide-react";
 const aiModels = [
   {
     id: "MOD-TXT-001",
-    name: "LLM Hallucination Detector v4",
-    description: "Detects text patterns typical of GPT-4, Claude, and Llama generated misinformation.",
+    name: "Detector de Alucinação LLM v4",
+    description: "Detecta padrões de texto típicos de desinformação gerada por GPT-4, Claude e Llama.",
     accuracy: "99.2%",
-    type: "Text Analysis",
+    type: "Análise de Texto",
     status: true,
     icon: BrainCircuit
   },
   {
     id: "MOD-VID-002",
-    name: "Deepfake Vision (Lip-Sync)",
-    description: "Analyzes phoneme-viseme mismatch to detect AI-generated talking heads.",
+    name: "Visão Deepfake (Lip-Sync)",
+    description: "Analisa incompatibilidade fonema-visema para detectar cabeças falantes geradas por IA.",
     accuracy: "98.5%",
-    type: "Video Forensics",
+    type: "Forense de Vídeo",
     status: true,
     icon: Video
   },
   {
     id: "MOD-AUD-001",
-    name: "Voice Cloning Sentinel",
-    description: "Identifies synthetic audio artifacts and lack of natural breathing patterns.",
+    name: "Sentinela de Clonagem de Voz",
+    description: "Identifica artefatos de áudio sintético e falta de padrões naturais de respiração.",
     accuracy: "97.8%",
-    type: "Audio Forensics",
+    type: "Forense de Áudio",
     status: true,
     icon: Mic2
   },
   {
     id: "MOD-IMG-003",
-    name: "Diffusion Artifact Scanner",
-    description: "Detects invisible watermarks and pixel inconsistencies from Midjourney/DALL-E.",
+    name: "Scanner de Artefatos de Difusão",
+    description: "Detecta marcas d'água invisíveis e inconsistências de pixels do Midjourney/DALL-E.",
     accuracy: "96.4%",
-    type: "Image Forensics",
+    type: "Forense de Imagem",
     status: true,
     icon: Eye
   },
   {
     id: "MOD-BOT-005",
-    name: "Social Botnet Cluster Analysis",
-    description: "Identifies coordinated inauthentic behavior (CIB) across social platforms.",
+    name: "Análise de Cluster de Botnet Social",
+    description: "Identifica comportamento inautêntico coordenado (CIB) em plataformas sociais.",
     accuracy: "94.1%",
-    type: "Network Analysis",
+    type: "Análise de Rede",
     status: false,
     icon: Bot
   }
@@ -58,11 +58,11 @@ export default function Compliance() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-foreground">AI Detection Models</h1>
-            <p className="text-muted-foreground">Configure the active neural networks used for fake news classification.</p>
+            <h1 className="text-3xl font-bold tracking-tight text-foreground">Modelos de Detecção de IA</h1>
+            <p className="text-muted-foreground">Configure as redes neurais ativas usadas para classificação de fake news.</p>
           </div>
           <button className="flex items-center gap-2 px-3 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/90 transition-colors">
-            <BrainCircuit className="h-4 w-4" /> Train New Model
+            <BrainCircuit className="h-4 w-4" /> Treinar Novo Modelo
           </button>
         </div>
 
@@ -81,7 +81,7 @@ export default function Compliance() {
                         {model.id}
                       </Badge>
                       <Badge className="bg-green-100 text-green-700 border-green-200 hover:bg-green-200">
-                        Accuracy: {model.accuracy}
+                        Precisão: {model.accuracy}
                       </Badge>
                     </div>
                     <p className="text-muted-foreground max-w-2xl">
@@ -98,9 +98,9 @@ export default function Compliance() {
 
                 <div className="flex items-center gap-4">
                   <div className="text-right mr-4">
-                    <span className="block text-sm font-medium">Model Status</span>
+                    <span className="block text-sm font-medium">Status do Modelo</span>
                     <span className={model.status ? "text-xs text-green-600 font-medium" : "text-xs text-muted-foreground"}>
-                      {model.status ? "Active" : "Offline"}
+                      {model.status ? "Ativo" : "Offline"}
                     </span>
                   </div>
                   <Switch checked={model.status} />
